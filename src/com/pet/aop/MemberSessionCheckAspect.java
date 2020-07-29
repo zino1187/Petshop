@@ -5,9 +5,11 @@ import javax.servlet.http.HttpSession;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
+import com.pet.exception.MemberAuthException;
+
 //세션을 체크하기 위한 공통 코드!!
-public class SessionCheckAspect {
-	public Object sessionCheck(ProceedingJoinPoint joinPoint) throws Throwable{
+public class MemberSessionCheckAspect {
+	public Object sessionCheck(ProceedingJoinPoint joinPoint) throws MemberAuthException,Throwable{
 		Object result=null; //로그인 여부에 따라서 채워질 데이터가 결정!!
 		//로그인 한 사람 : proceed()메서드의 반환값 
 		//로그인 안 한 사람 :  view/error  
@@ -47,8 +49,10 @@ public class SessionCheckAspect {
 				if(session.getAttribute("member")==null) {
 					//로그인 하지 않은 경우로 본다!!!
 					System.out.println("로그인이 필요합니다");
-					request.setAttribute("msg", "로그인이 필요한 서비스입니다");
-					result="view/error";
+					
+					//request.setAttribute("msg", "로그인이 필요한 서비스입니다");
+					//result="view/error";
+					throw new MemberAuthException("예외발생 - 로그인이 필요한 서비스입니다");
 				}else {
 					System.out.println("로그인 상태군요");
 					//가로챈 메서드 호출을 다시 진행시킨다!!

@@ -10,13 +10,7 @@
   <ul class="navigation">  
     <li><a href="/product/list">상품목록</a></li>
     <li><a href="/event/list">기획상품</a></li>
-    
-    <%if(member==null){%>
-    	<li><a href="javascript:alert('로그인이 필요한 서비스입니다.');">장바구니</a></li>
-	<%}else{%>    	
-    	<li><a href="/shop/cart/list">장바구니</a></li>
-    <%}%>
-    
+   	<li><a href="/shop/cart/list">장바구니</a></li>
     <li><a href="/member/mypage">MyPage</a></li>
 	<%if(member==null){%>    
     	<li><a href="/member/login.jsp">로그인</a></li>

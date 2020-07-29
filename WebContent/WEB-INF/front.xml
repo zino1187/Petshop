@@ -88,26 +88,28 @@
  --> 
 
  	<!-- 로그인 체크 빈 객체 등록 -->
- 	<bean id="sessionCheckAspect" 
- 		class="com.pet.aop.SessionCheckAspect"/>
+ 	<bean id="memberSessionCheckAspect" class="com.pet.aop.MemberSessionCheckAspect"/>
+ 	<bean id="adminSessionCheckAspect" class="com.pet.aop.AdminSessionCheckAspect"/>
  	
  	<!--어떤 공통코드를 어느 지점에, 어떤 시점에 넣을지.. -->
 	<aop:config>
-		<aop:aspect ref="sessionCheckAspect">
+		<aop:aspect ref="memberSessionCheckAspect">
 			<aop:pointcut 
-				expression="execution(public * com.pet.controller.shopping.ShoppingController.*(..)) || execution(public * com.pet.controller.cs.CSController.*(..)) || execution(public * com.pet.controller.member.MemberController.*(..)) || execution(public * com.pet.controller.admin..*Controller.*(..))" 
-				id="methodPointcut"/>
-			<aop:around method="sessionCheck" pointcut-ref="methodPointcut"/>			
+				expression="execution(public * com.pet.controller.shopping.ShoppingController.*(..)) || execution(public * com.pet.controller.cs.CSController.*(..)) || execution(public * com.pet.controller.member.MemberController.*(..))" 
+				id="memberPointcut"/>
+			<aop:around method="sessionCheck" pointcut-ref="memberPointcut"/>			
+		</aop:aspect>
+	</aop:config>
+	 	
+	<aop:config>
+		<aop:aspect ref="adminSessionCheckAspect">
+			<aop:pointcut 
+				expression="execution(public * com.pet.controller.admin..AdminController.*(..))" id="adminPointcut"/>
+			<aop:around method="sessionCheck" pointcut-ref="adminPointcut"/>			
 		</aop:aspect>
 	</aop:config> 	
  	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
+ 	<bean class="com.pet.controller.common.GlobalExceptionHandler"/>
  	
 </beans>
 

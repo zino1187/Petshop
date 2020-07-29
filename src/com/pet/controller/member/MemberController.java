@@ -56,8 +56,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/logout", method=RequestMethod.GET)
-	public String logout(Model model ,HttpSession session){
+	public String logout(Model model ,HttpServletRequest request){
 		//세션을 소멸시켜 버린다!!
+		HttpSession session = request.getSession();
 		session.invalidate();//현재 클라이언트와 관련된 세션을 무효화시킴!
 		//주의 객체를 소멸하는건 아니다..자바에서는 객체를 죽일수는 없으니깐..
 		model.addAttribute("msg", "로그아웃 처리되었습니다");
@@ -69,8 +70,9 @@ public class MemberController {
 	
 	//마이페이지 요청 처리
 	@RequestMapping(value="/member/mypage", method=RequestMethod.GET)
-	public String getMyPage(Model model,HttpSession session) {
+	public String getMyPage(Model model,HttpServletRequest request) {
 		//회원정보 MemberService 
+		HttpSession session = request.getSession();
 		Member member=(Member)session.getAttribute("member");
 		model.addAttribute("member", member);
 		

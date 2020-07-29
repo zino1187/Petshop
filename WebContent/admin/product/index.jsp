@@ -1,6 +1,7 @@
+<%@page import="com.pet.controller.common.Pager"%>
 <%@page import="com.pet.domain.EventProduct"%>
 <%@page import="com.pet.domain.Event"%>
-<%@page import="com.study.controller.common.Pager"%>
+
 <%@page import="com.pet.domain.Product"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8"%>

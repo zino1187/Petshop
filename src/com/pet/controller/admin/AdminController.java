@@ -35,7 +35,7 @@ public class AdminController {
 			HttpSession session=request.getSession();
 			session.setAttribute("admin", result);//회원 정보 저장!!!
 			//관리자 모드 메인 페이지 보여줌
-			mav.setViewName("admin/index");
+			mav.setViewName("admin/main");
 		}else {
 			//욕 페이지 보여줌
 			mav.setViewName("view/error");
